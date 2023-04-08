@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>
-       default fummy text!
+       and changed here something too
       </Text>
       <StatusBar style="auto" />
     </View>
