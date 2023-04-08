@@ -5,7 +5,7 @@ const client = new PheroClient(fetch);
 
 async function main() {
   const message = await client.helloWorldService.helloWorld('Jim')
-  console.log(message) // `Hi there, Jim!`
+  console.log(message) // `Hi there, Alki`
 }
 
 main()
