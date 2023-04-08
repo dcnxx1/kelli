@@ -10,7 +10,7 @@ export class TTSController {
     return this.ttsService.getDefaultTTS();
   }
 
-  @Get()
+  @Get('gg')
   getSomething(): string {
     return this.ttsService.getSomeTTS();
   }
