@@ -1,4 +1,4 @@
-import { AppState, AppStateStatus } from "react-native/types";
+import { AppState, AppStateStatus } from "react-native";
 import { SWRConfig } from "swr";
 import React, { ReactNode } from "react";
 
