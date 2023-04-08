@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>
-        {/* {data.setData.isLoading ? "isLoading now.." : data.setData.response} */}
+       default fummy text!
       </Text>
       <StatusBar style="auto" />
     </View>
