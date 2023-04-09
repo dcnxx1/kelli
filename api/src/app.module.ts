@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import TTSModule from './textToSpeech/tts.module';
+import { TTSController } from './textToSpeech/tts.controller';
+import { TTSService } from './textToSpeech/tts.service';
 
 @Module({
   imports: [TTSModule],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [TTSController],
+  providers: [TTSService],
 })
 export class AppModule {}
