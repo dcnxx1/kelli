@@ -6,12 +6,7 @@ export class TTSController {
   constructor(private readonly ttsService: TTSService) {}
 
   @Get()
-  getInitialRoute(): string {
-    return this.ttsService.getDefaultTTS();
-  }
-
-  @Get('gg')
-  getSomething(): string {
-    return this.ttsService.getSomeTTS();
+  get(): string {
+    return this.ttsService.get();
   }
 }
