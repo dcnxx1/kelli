@@ -2,7 +2,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { ReactNode } from "react";
 import { theme } from "../../themes";
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export default function Frame({ children }: Props) {
