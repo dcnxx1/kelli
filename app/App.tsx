@@ -8,7 +8,7 @@ export default function App() {
   // const data = useRequest("/");
 
   return (
-    <View style={homeStyle.ZAZA}>
+    <View style={homeStyle.App}>
       <Home />
       <StatusBar style="auto" />
     </View>
@@ -16,7 +16,7 @@ export default function App() {
 }
 
 const homeStyle = StyleSheet.create({
-    ZAZA: {
+    App: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center'
