@@ -1,21 +1,23 @@
 import { View, StyleSheet, Image } from "react-native";
-
+import { ReactNode } from "react";
+import { theme } from "../../themes";
 interface Props {
-  avatarKey: string;
+  children: ReactNode;
 }
 
-export default function Frame({ avatarKey }: Props) {
-  return (
-    <View style={FrameStyle.Frame}>
-      <Image
-        style={FrameStyle.Image}
-        source={require(`../../images/characters/${avatarKey}`)}
-      />
-    </View>
-  );
+export default function Frame({ children }: Props) {
+  return <View style={FrameStyle.Frame}>{children}</View>;
 }
 
 const FrameStyle = StyleSheet.create({
-  Frame: {},
-  Image: {},
+  Frame: {
+    // padding: "10%",
+    minWidth: "40%",
+    minHeight: "20%",
+    borderWidth: 2,
+    borderColor: theme.colors.kelliBlack,
+    borderStyle: "dotted",
+    borderRadius: 10,
+    backgroundColor: theme.colors.kelliBrown,
+  },
 });
