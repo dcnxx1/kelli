@@ -4,9 +4,7 @@ import { useRequest } from "./src/shared/hooks";
 import { Home } from "./src/screens";
 
 export default function App() {
-  console.log("parent renders")
-  // const data = useRequest("/");
-
+  
   return (
     <View style={homeStyle.App}>
       <Home />
