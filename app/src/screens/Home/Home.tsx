@@ -5,7 +5,7 @@ import { Frame } from '../../shared/components'
 
 export default function Home(){
     return <View style={ss.Homes}>
-        <Frame avatarKey={"yoehoe"} />
+        <Frame avatarKey={"dutch/ruben.png"} />
     </View>
 }
 
