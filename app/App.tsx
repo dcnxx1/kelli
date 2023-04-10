@@ -1,10 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { useRequest } from "./src/shared/hooks";
+import { StyleSheet, View } from "react-native";
 import { Home } from "./src/screens";
 
 export default function App() {
-  
+
   return (
     <View style={homeStyle.App}>
       <Home />
