@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text } from "react-native";
 import { ReactNode } from "react";
-
+import { theme } from "../../themes";
 interface Props {
   children?: ReactNode;
 }
@@ -15,13 +15,14 @@ export default function DisplayName({ children }: Props) {
 const OptionStyle = StyleSheet.create({
   Option: {
     width: 100,
-    padding: 15,
-    height: 10,
     borderRadius: 5,
-    backgroundColor: "red",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: theme.colors.kelliPurple
   },
 
   NameText: {
-    color: "green",
+    color:'white',
+    fontSize: 13
   },
 });

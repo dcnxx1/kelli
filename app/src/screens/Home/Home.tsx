@@ -1,26 +1,37 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { theme } from "../../shared/themes";
+import { StyleSheet, View } from "react-native";
 import {
-  Frame,
+  Character,
+  Languages,
+  SelectLanguage,
+  SelectableCharacters,
+} from "../../models/character";
+import {
   Character as Avatar,
-  LanguageOptions,
   DisplayName,
+  Frame,
+  LanguageOptions,
 } from "../../shared/components";
-import { Character } from "../../models/character";
+import { theme } from "../../shared/themes";
 
 export default function Home() {
-  const [language, setLanguage] = useState();
-  const [character, setCharacter] = useState<Character>();
+  const [characterArray, setCharaterArray] =
+    useState<Character[]>(SelectableCharacters);
+  const [languageArray, setLanguageArray] =
+    useState<SelectLanguage[]>(Languages);
+  const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
+  const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   return (
     <View style={ss.Homes}>
       <Frame>
+        {/* Todo : Make Avatar URI dynamic */}
         <Avatar />
         <View style={ss.StyleOptions}>
           <LanguageOptions />
-          <DisplayName>Lotte</DisplayName>
+          <DisplayName>{character.characterName}</DisplayName>
         </View>
       </Frame>
     </View>
@@ -38,5 +49,6 @@ const ss = StyleSheet.create({
   StyleOptions: {
     width: 100,
     flexDirection: "row",
+    gap: 5,
   },
 });

@@ -1,11 +1,11 @@
 import { Image, StyleSheet } from "react-native";
 
 interface Props {
-    avatarKey?: string
+    uri?: string
 }
 
-export default function Character({avatarKey} : Props) {
-    return <Image style={ImageStyle.Image} source={require('../../images/characters/dutch/lotte.png')} />
+export default function Character({uri} : Props) {
+    return <Image source={{uri: uri}} style={ImageStyle.Image}/>
 }
 
 const ImageStyle = StyleSheet.create({

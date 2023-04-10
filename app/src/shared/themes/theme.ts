@@ -7,6 +7,7 @@ export default {
     kelliBrown: "#ef9b0f",
     kelliBlack: "#100c08",
     kelliGrey: "#c9c9c9",
+    kelliPurple: "#df7474"
   },
   fonts: {
     // Todo add fonts

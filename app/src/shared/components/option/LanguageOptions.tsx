@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image, FlatList } from "react-native";
-
+import { theme } from "../../themes";
 interface Props {
   isOpen?: boolean;
   flag?: string;
@@ -24,6 +24,6 @@ const OptionStyle = StyleSheet.create({
     padding: 15,
     height: 10,
     borderRadius: 5,
-    backgroundColor: 'red'
+    backgroundColor: theme.colors.kelliPurple
   },
 });
