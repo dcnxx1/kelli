@@ -11,7 +11,6 @@ export default function Character({avatarKey} : Props) {
 const ImageStyle = StyleSheet.create({
     Image: {
         alignSelf: 'center',
-        justifySelf: 'center',
     }
 })
 
