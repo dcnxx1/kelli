@@ -1,14 +1,19 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
 import { theme } from "../../shared/themes";
-import { Frame } from "../../shared/components";
+import { Frame, Character as Avatar } from "../../shared/components";
 import { Character } from "../../models/character";
+import LanguageOptions from '../../shared/components/option/LangaugeOptions';
 
 export default function Home() {
+  const [language, setLanguage] = useState();
+  const [character, setCharacter] = useState<Character>();
+  const [isOpenOptions, setOptions] = useState(false)
   return (
     <View style={ss.Homes}>
       <Frame>
-
+        <Avatar />
+        
       </Frame>
     </View>
   );

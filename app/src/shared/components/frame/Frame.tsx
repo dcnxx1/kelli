@@ -11,10 +11,10 @@ export default function Frame({ children }: Props) {
 
 const FrameStyle = StyleSheet.create({
   Frame: {
-    // padding: "10%",
-    minWidth: "40%",
-    minHeight: "20%",
+    padding: 10,
     borderWidth: 2,
+    minWidth: '40%',
+    minHeight: '20%',
     borderColor: theme.colors.kelliBlack,
     borderStyle: "dotted",
     borderRadius: 10,
