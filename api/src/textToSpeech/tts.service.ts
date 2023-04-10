@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import AWS, { Polly } from 'aws-sdk';
 import { Readable, Stream } from 'stream';
 import { join } from 'path';
-import fs from 'fs'
+import fs from 'fs';
 
 @Injectable()
 export class TTSService {
@@ -16,7 +16,7 @@ export class TTSService {
  };
  protected describeVoicesOutput: AWS.Polly.Voice[] = [];
  protected voiceAudio: Polly.SynthesizeSpeechOutput = {};
- audioUri : string = ''
+ audioUri: string = '';
 
  get(): string {
   return 'CHANGED AGAIN AGAIN';
@@ -51,12 +51,24 @@ export class TTSService {
   };
  }
 
-  startSpeech(text: string, voiceId: string): string {
-    this.polly.startSpeechSynthesisTask(this.getRequestParams(text, voiceId), (err, data) => {
-        if(err) console.log("err :>>", err.message)
-        console.log(data.SynthesisTask.OutputUri)
-        this.audioUri = data.SynthesisTask.OutputUri
-    })
-    return this.audioUri
-}
+ startSpeech(text: string, voiceId: string): string {
+  try {
+   if (!text || !voiceId) {
+    throw new Error('Text or voiceId are undefined');
+   }
+
+   this.polly.startSpeechSynthesisTask(
+    this.getRequestParams(text, voiceId),
+    (err, data) => {
+     if (err) throw new Error('Failed to request data from polly');
+     this.audioUri = data.SynthesisTask.OutputUri;
+    }
+   );
+   return this.audioUri;
+  } catch (err) {
+   throw new Error(
+    'Something went wrong inside startSpeech function ' + err.message
+   );
+  }
+ }
 }

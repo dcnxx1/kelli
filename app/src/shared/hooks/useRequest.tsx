@@ -21,7 +21,7 @@ export default function useRequest(path: string, request?: any) {
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const api = axios.create({
-    baseURL: "http://192.168.2.20:3030/",
+    baseURL: "http://192.168.2.20:3030/tts/",
   });
 
  

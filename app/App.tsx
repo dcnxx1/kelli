@@ -1,25 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import useRequest from "./src/data/useRequest";
+import { useRequest } from "./src/shared/hooks";
+import { Home } from "./src/screens";
+
 export default function App() {
   console.log("parent renders")
   // const data = useRequest("/");
 
   return (
-    <View style={styles.container}>
-      <Text>
-       and changed here something too
-      </Text>
+    <View style={homeStyle.ZAZA}>
+      <Home />
       <StatusBar style="auto" />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const homeStyle = StyleSheet.create({
+    ZAZA: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+})
+
