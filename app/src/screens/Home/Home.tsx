@@ -1,5 +1,8 @@
 import React from 'react'
-import {View, Text, StyleSheet, TextInput} from 'react-native'
+import {View, Text, StyleSheet} from 'react-native'
+import { theme } from '../../shared/themes'
+import { Character } from '../../shared/components'
+import { Frame } from '../../shared/components'
 
 export default function Home(){
     return <View style={ss.Homes}>
@@ -14,5 +17,6 @@ const ss = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         height: '100%',
+        backgroundColor: theme.colors.kelliGold
     },
 })
