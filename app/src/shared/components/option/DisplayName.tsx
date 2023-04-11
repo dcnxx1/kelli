@@ -18,7 +18,8 @@ const OptionStyle = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: theme.colors.kelliPurple
+    backgroundColor: theme.colors.kelliPurple,
+    maxHeight: 40,
   },
 
   NameText: {

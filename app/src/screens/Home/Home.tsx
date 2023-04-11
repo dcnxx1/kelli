@@ -14,23 +14,30 @@ import {
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
 
-
 export default function Home() {
-  const [characterArray, setCharaterArray] =
-    useState<Character[]>(SelectableCharacters);
-  const [languageArray, setLanguageArray] =
-    useState<SelectLanguage[]>(Languages);
+    // STATIC DATA (ARRAYS)
+  const [characterArray, setCharaterArray] =useState<Character[]>(SelectableCharacters);
+  const [languageArray, setLanguageArray] =useState<SelectLanguage[]>(Languages);
+    //  STATES
   const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
   const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
+  console.log(isOpenOptions);
   return (
     <View style={ss.Homes}>
       <Frame>
         <Avatar avatarKey={character.avatarKey} />
         <View style={ss.StyleOptions}>
-          <LanguageOptions />
+          <LanguageOptions
+            flag={character.language}
+            languages={languageArray}
+            language={language}
+            setLanguage={setLanguage}
+            isOpen={isOpenOptions}
+            setOptions={setOptions}
+            country={character.language}
+          />
           <DisplayName>{character.characterName}</DisplayName>
         </View>
       </Frame>

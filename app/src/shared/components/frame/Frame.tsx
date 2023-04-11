@@ -18,6 +18,7 @@ const FrameStyle = StyleSheet.create({
     borderColor: theme.colors.kelliBlack,
     borderStyle: "dotted",
     borderRadius: 10,
+    maxHeight: 190,
     backgroundColor: theme.colors.kelliBrown,
   },
 });

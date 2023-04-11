@@ -1,4 +1,4 @@
-export enum LanguageCodes {
+enum LanguageCodes {
   English = "en-GB",
   USA = "en-US",
   Dutch = "nl-NL",
@@ -6,15 +6,15 @@ export enum LanguageCodes {
 }
 
 export enum Language {
-  English = "Great-Brittain",
+  English = "English",
   Netherlands = "Netherlands",
-  USA = "United States",
+  UnitedStates = "UnitedStates",
   France = "France",
 }
 
 export interface Character {
   voiceId: string;
-  languageCode: LanguageCodes;
+  languageCode: string;
   language: string;
   avatarKey: string;
   characterName: string;
@@ -24,20 +24,21 @@ export interface Character {
 export interface SelectLanguage {
   flag: string;
   country: string;
+  code: string
 }
 
 export enum AvatarKey {
-  KevinAvatar = 'KevinAvatar',
-  OlafAvatar = 'OlafAvatar',
-  MarkAvatar = 'MarkAvatar',
-  KendraAvatar = 'KendraAvatar',
-  StellaAvatar = 'StellaAvatar',
-  JoeAvatar = 'JoeAvatar',
-  CocoAvatar = 'CocoAvatar',
-  BrianAvatar = 'BrianAvatar',
-  RubenAvatar = 'RubenAvatar',
-  LotteAvatar = ' LotteAvatar',
-  LauraAvatar = 'LauraAvatar',
+  KevinAvatar = "KevinAvatar",
+  OlafAvatar = "OlafAvatar",
+  MarkAvatar = "MarkAvatar",
+  KendraAvatar = "KendraAvatar",
+  StellaAvatar = "StellaAvatar",
+  JoeAvatar = "JoeAvatar",
+  CocoAvatar = "CocoAvatar",
+  BrianAvatar = "BrianAvatar",
+  RubenAvatar = "RubenAvatar",
+  LotteAvatar = " LotteAvatar",
+  LauraAvatar = "LauraAvatar",
 }
 
 export const SelectableCharacters: Character[] = [
@@ -46,7 +47,7 @@ export const SelectableCharacters: Character[] = [
     languageCode: LanguageCodes.USA,
     avatarKey: AvatarKey.KevinAvatar,
     characterName: "Kevin",
-    language: LanguageCodes.USA,
+    language: Language.UnitedStates,
     disabled: false,
   },
   {
@@ -54,7 +55,7 @@ export const SelectableCharacters: Character[] = [
     languageCode: LanguageCodes.USA,
     avatarKey: AvatarKey.MarkAvatar,
     characterName: "Mark",
-    language: LanguageCodes.USA,
+    language: Language.UnitedStates,
 
     disabled: false,
   },
@@ -62,7 +63,7 @@ export const SelectableCharacters: Character[] = [
     voiceId: "Olaf",
     languageCode: LanguageCodes.USA,
     avatarKey: AvatarKey.OlafAvatar,
-    language: LanguageCodes.USA,
+    language: Language.UnitedStates,
 
     characterName: "Olaf",
     disabled: true,
@@ -71,7 +72,7 @@ export const SelectableCharacters: Character[] = [
     voiceId: "Kendra",
     languageCode: LanguageCodes.USA,
     avatarKey: AvatarKey.KendraAvatar,
-    language: LanguageCodes.USA,
+    language: Language.UnitedStates,
     characterName: "Kendra",
     disabled: false,
   },
@@ -79,7 +80,7 @@ export const SelectableCharacters: Character[] = [
     voiceId: "Joe",
     languageCode: LanguageCodes.English,
     avatarKey: AvatarKey.JoeAvatar,
-    language: LanguageCodes.English,
+    language: Language.English,
     characterName: "Joe",
     disabled: false,
   },
@@ -87,7 +88,7 @@ export const SelectableCharacters: Character[] = [
     voiceId: "Amy",
     languageCode: LanguageCodes.English,
     avatarKey: AvatarKey.CocoAvatar,
-    language: LanguageCodes.English,
+    language: Language.English,
 
     characterName: "Coco",
     disabled: false,
@@ -96,7 +97,7 @@ export const SelectableCharacters: Character[] = [
     voiceId: "Brian",
     languageCode: LanguageCodes.English,
     avatarKey: AvatarKey.BrianAvatar,
-    language: LanguageCodes.English,
+    language: Language.English,
     characterName: "Brian",
     disabled: false,
   },
@@ -106,13 +107,13 @@ export const SelectableCharacters: Character[] = [
     disabled: false,
     characterName: "Stella",
     avatarKey: AvatarKey.StellaAvatar,
-    language: LanguageCodes.French,
+    language: Language.France,
   },
   {
     voiceId: "Lotte",
     languageCode: LanguageCodes.Dutch,
     avatarKey: AvatarKey.LotteAvatar,
-    language: LanguageCodes.Dutch,
+    language: Language.Netherlands,
     characterName: "Lotte",
     disabled: true,
   },
@@ -120,7 +121,7 @@ export const SelectableCharacters: Character[] = [
     voiceId: "Laura",
     languageCode: LanguageCodes.Dutch,
     avatarKey: AvatarKey.LauraAvatar,
-    language: LanguageCodes.Dutch,
+    language: Language.Netherlands,
     characterName: "Laura",
     disabled: false,
   },
@@ -128,7 +129,7 @@ export const SelectableCharacters: Character[] = [
     voiceId: "Ruben",
     languageCode: LanguageCodes.Dutch,
     avatarKey: AvatarKey.RubenAvatar,
-    language: LanguageCodes.Dutch,
+    language: Language.Netherlands,
     characterName: "Ruben",
     disabled: false,
   },
@@ -136,19 +137,23 @@ export const SelectableCharacters: Character[] = [
 
 export const Languages: SelectLanguage[] = [
   {
-    flag: "usa.png",
+    flag: Language.UnitedStates,
     country: "United States",
+    code: LanguageCodes.USA,
   },
   {
-    flag: "english.png",
+    flag: Language.English,
     country: "Great-Brittain",
+    code: LanguageCodes.English
   },
   {
-    flag: "france.png",
+    flag: Language.France,
     country: "France",
+    code: LanguageCodes.French
   },
   {
-    flag: "netherlands.png",
+    flag: Language.Netherlands,
     country: "Netherlands",
+    code: LanguageCodes.Dutch
   },
 ];
