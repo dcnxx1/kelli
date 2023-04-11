@@ -14,6 +14,7 @@ import {
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
 
+
 export default function Home() {
   const [characterArray, setCharaterArray] =
     useState<Character[]>(SelectableCharacters);
@@ -28,7 +29,7 @@ export default function Home() {
     <View style={ss.Homes}>
       <Frame>
         {/* Todo : Make Avatar URI dynamic */}
-        <Avatar />
+        <Avatar avatarKey={character.avatarKey} />
         <View style={ss.StyleOptions}>
           <LanguageOptions />
           <DisplayName>{character.characterName}</DisplayName>

@@ -1,16 +1,15 @@
 import { Image, StyleSheet } from "react-native";
-
+import getAvatar from "../../utils/helpers";
 interface Props {
-    uri?: string
+    avatarKey: string
 }
 
-export default function Character({uri} : Props) {
-    return <Image source={{uri: uri}} style={ImageStyle.Image}/>
+export default function Character({ avatarKey }: Props) {
+    return <Image source={getAvatar(avatarKey)} style={ImageStyle.Image} />;
 }
 
 const ImageStyle = StyleSheet.create({
-    Image: {
-        alignSelf: 'center',
-    }
-})
-
+  Image: {
+    alignSelf: "center",
+  },
+});
