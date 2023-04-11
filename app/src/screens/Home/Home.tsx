@@ -28,7 +28,6 @@ export default function Home() {
   return (
     <View style={ss.Homes}>
       <Frame>
-        {/* Todo : Make Avatar URI dynamic */}
         <Avatar avatarKey={character.avatarKey} />
         <View style={ss.StyleOptions}>
           <LanguageOptions />
