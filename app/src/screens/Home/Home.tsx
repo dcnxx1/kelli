@@ -13,6 +13,7 @@ import {
   LanguageOptions,
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
+import Input from "../../shared/components/input/Input";
 const modifiedChars = [...SelectableCharacters];
 
 export default function Home() {
@@ -36,11 +37,10 @@ export default function Home() {
   );
 
   const changeCharacter = useCallback((recievedCharacter: Character) => {
-    if(character.voiceId !== recievedCharacter.voiceId){
-      setCharacter(recievedCharacter)
+    if (character.voiceId !== recievedCharacter.voiceId) {
+      setCharacter(recievedCharacter);
     }
-  }, [])
-
+  }, []);
 
   useEffect(() => {
     const characterPredicate = (char: Character) =>
@@ -55,23 +55,30 @@ export default function Home() {
 
   return (
     <View style={ss.Homes}>
-      <Frame>
-        <Avatar avatarKey={character && character.avatarKey} />
-        <View style={ss.StyleOptions}>
-          <LanguageOptions
-            flag={character && character.language}
-            languages={languageArray}
-            language={language && language}
-            setLanguage={setLanguageCallback}
-            isOpen={isOpenOptions}
-            setOptions={setOptions}
-            country={character && character.language}
-          />
-          <DisplayName character={character} setCharacter={changeCharacter} characters={characterArray}>
-            {!!character && character.characterName}
-          </DisplayName>
-        </View>
-      </Frame>
+      <View style={ss.FrameContainer}>
+        <Frame>
+          <Avatar avatarKey={character && character.avatarKey} />
+          <View style={ss.StyleOptions}>
+            <LanguageOptions
+              flag={character && character.language}
+              languages={languageArray}
+              language={language && language}
+              setLanguage={setLanguageCallback}
+              isOpen={isOpenOptions}
+              setOptions={setOptions}
+              country={character && character.language}
+            />
+            <DisplayName
+              character={character}
+              setCharacter={changeCharacter}
+              characters={characterArray}
+            >
+              {!!character && character.characterName}
+            </DisplayName>
+          </View>
+        </Frame>
+      </View>
+      <Input />
     </View>
   );
 }
@@ -89,4 +96,11 @@ const ss = StyleSheet.create({
     flexDirection: "row",
     gap: 5,
   },
+  FrameContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    zIndex: 400,
+  }
 });
