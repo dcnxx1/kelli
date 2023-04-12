@@ -3,15 +3,27 @@ import {
   TextInput,
   StyleSheet,
   Image,
-  KeyboardAvoidingView,
 } from "react-native";
 import { theme } from "../../themes";
 import Bucket from "../../images/actions/delete.png";
-export default function Input() {
-  return (
+import {useState, useCallback, useRef, useMemo, memo} from 'react'
+import useRequest from '../../hooks/useRequest';
+let  rendered = 0
+
+
+function Input() {
+    const [input, setInput] = useState<string>('')
+
+    const changeInput = useCallback((newText: string) => {
+        setInput(newText)
+    }, [setInput])
+    
+    return (
     <View style={InputStyle.Container}>
       <View style={InputStyle.InputContainer}>
         <TextInput
+          value={input}
+          onChangeText={newText => changeInput(newText)}
           placeholderTextColor={theme.colors.kelliGrey}
           placeholder="Say something to Kevin..."
           multiline
@@ -23,6 +35,8 @@ export default function Input() {
     </View>
   );
 }
+
+export default memo(Input)
 
 const InputStyle = StyleSheet.create({
   Container: {
