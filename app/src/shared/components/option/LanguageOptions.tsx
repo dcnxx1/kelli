@@ -33,8 +33,6 @@ type DropDown = {
 export default function LanguageOptions({
   isOpen,
   setOptions,
-  flag,
-  country,
   languages,
   language,
   setLanguage,
@@ -43,10 +41,13 @@ export default function LanguageOptions({
     setOptions(!isOpen);
   }, [isOpen]);
 
-  const setFlag = useCallback((language: SelectLanguage) => {
-    setLanguage(language);
-    setOptions(false);
-  }, []);
+  const setFlag = useCallback(
+    (language: SelectLanguage) => {
+      setLanguage(language);
+      setOptions(false);
+    },
+    [setOptions, language]
+  );
 
   return (
     <TouchableOpacity style={OptionStyle.styleOptions} onPress={changeOptions}>
@@ -55,10 +56,7 @@ export default function LanguageOptions({
         languages
           .filter((f) => f.flag !== language.flag)
           .map((flag) => (
-            <Pressable key={flag.code}
-              onPress={() => setFlag(flag)}
-              style={OptionStyle.moreFlags}
-            >
+            <Pressable key={flag.code} onPress={() => setFlag(flag)}>
               <View style={OptionStyle.flagStyle}>
                 <Image style={OptionStyle.Image} source={getFlags(flag.flag)} />
               </View>
@@ -74,9 +72,6 @@ export default function LanguageOptions({
 const OptionStyle = StyleSheet.create({
   flagStyle: {
     paddingVertical: 2,
-  },
-  moreFlags: {
-    // position: "absolute",
   },
   styleOptions: {
     paddingHorizontal: 5,
@@ -100,5 +95,5 @@ const OptionStyle = StyleSheet.create({
 const DropDownMenu = styled(Pressable)<{ isOpen: boolean }>`
   // <:: https://stackoverflow.com/a/66170576 Thank you!
   transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
-  padding-top: ${({ isOpen }) => (isOpen ? 10 : 0)};
+  padding-top: ${({ isOpen }) => (isOpen ? "10px" : "0px")};
 `;
