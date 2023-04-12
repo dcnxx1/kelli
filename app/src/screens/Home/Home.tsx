@@ -35,12 +35,16 @@ export default function Home() {
     [language, setLanguage]
   );
 
-  const changeCharacter = useCallback((recievedCharacter: Character) => {
-    if(character.voiceId !== recievedCharacter.voiceId){
-      setCharacter(recievedCharacter)
-    }
-  }, [])
+  const changeCharacter = useCallback(
+    (recievedCharacter: Character) => {
+      if (character.voiceId !== recievedCharacter.voiceId) {
+        setCharacter(recievedCharacter);
+      }
+    },
+    [character.voiceId]
+  );
 
+   
 
   useEffect(() => {
     const characterPredicate = (char: Character) =>
@@ -67,7 +71,11 @@ export default function Home() {
             setOptions={setOptions}
             country={character && character.language}
           />
-          <DisplayName character={character} setCharacter={changeCharacter} characters={characterArray}>
+          <DisplayName
+            character={character}
+            setCharacter={changeCharacter}
+            characters={characterArray}
+          >
             {!!character && character.characterName}
           </DisplayName>
         </View>

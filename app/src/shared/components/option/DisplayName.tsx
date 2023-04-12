@@ -6,7 +6,7 @@ import {
   Pressable,
   FlatList,
 } from "react-native";
-import { ReactNode, useState, useCallback, useContext } from "react";
+import { ReactNode, useState, useCallback } from "react";
 import Avatar from "../frame/Avatar";
 import { theme } from "../../themes";
 import DropDown from "../../images/actions/icondropdown.png";
@@ -69,7 +69,9 @@ export default function DisplayName({
                           />
                         )}
                         <Avatar avatarKey={item.avatarKey} />
-                        <Text style={OptionModal.NameText}>{item.characterName}</Text>
+                        <Text style={OptionModal.NameText}>
+                          {item.characterName}
+                        </Text>
                       </Frame>
                     </Pressable>
                   );
@@ -158,7 +160,7 @@ const OptionModal = StyleSheet.create({
   },
 
   NameText: {
-    alignSelf: 'center',
+    alignSelf: "center",
     fontSize: 15,
-  }
+  },
 });
