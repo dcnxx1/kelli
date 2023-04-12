@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   Character,
@@ -13,37 +13,44 @@ import {
   LanguageOptions,
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
+const modifiedChars = [...SelectableCharacters];
 
 export default function Home() {
-    // STATIC DATA (ARRAYS)
-  const [characterArray, setCharaterArray] =useState<Character[]>(SelectableCharacters);
-  const [languageArray, setLanguageArray] =useState<SelectLanguage[]>(Languages);
-    //  STATES
-  const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
-  const [character, setCharacter] = useState<Character>(characterArray[3]);
+  // STATIC DATA (ARRAYS)
+  const [characterArray, setCharacterArray] =
+    useState<Character[]>(modifiedChars);
+
+  const [languageArray, setLanguageArray] =
+    useState<SelectLanguage[]>(Languages);
+  //  STATES
+  const [language, setLanguage] = useState<SelectLanguage>();
+  const [character, setCharacter] = useState<Character>();
   const [isOpenOptions, setOptions] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
-
-  const getCharactersByCurrentFlag = () => {
-
-  }
+  const setLanguageCallback = useCallback((selectLanguage : SelectLanguage) => {
+    setLanguage(selectLanguage)
+    setOptions(false)
+    console.log("language set :>>", language)
+  }, [language, setLanguage]);
 
   return (
     <View style={ss.Homes}>
       <Frame>
-        <Avatar avatarKey={character.avatarKey} />
+        <Avatar avatarKey={character && character.avatarKey} />
         <View style={ss.StyleOptions}>
           <LanguageOptions
-            flag={character.language}
+            flag={character && character.language}
             languages={languageArray}
-            language={language}
-            setLanguage={setLanguage}
+            language={language && language}
+            setLanguage={setLanguageCallback}
             isOpen={isOpenOptions}
             setOptions={setOptions}
-            country={character.language}
+            country={character && character.language}
           />
-          <DisplayName>{character.characterName}</DisplayName>
+          <DisplayName characters={characterArray}>
+            {!!character && character.characterName}
+          </DisplayName>
         </View>
       </Frame>
     </View>

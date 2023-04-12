@@ -15,14 +15,15 @@ import { useCallback } from "react";
 import { SelectLanguage } from "../../../models/character";
 import styled from "styled-components/native";
 import React from "react";
+
 interface Props {
   isOpen: boolean;
   setOptions: React.Dispatch<React.SetStateAction<boolean>>;
-  flag: string;
-  setLanguage: React.Dispatch<React.SetStateAction<SelectLanguage>>;
+  flag?: string;
+  setLanguage: (selectLanguage: SelectLanguage) => void;
   languages: SelectLanguage[];
-  language: SelectLanguage;
-  country: string;
+  language?: SelectLanguage;
+  country?: string;
 }
 
 type DropDown = {
@@ -42,22 +43,15 @@ export default function LanguageOptions({
     setOptions(!isOpen);
   }, [isOpen]);
 
-  const setFlag = useCallback(
-    (language: SelectLanguage) => {
-      setLanguage(language);
-      setOptions(false);
-    },
-    [setOptions, language]
-  );
 
   return (
     <TouchableOpacity style={OptionStyle.styleOptions} onPress={changeOptions}>
-      <Image style={OptionStyle.Image} source={getFlags(language.flag)} />
+      <Image style={OptionStyle.Image} source={!!language && getFlags(language.flag)} />
       {isOpen &&
         languages
-          .filter((f) => f.flag !== language.flag)
+          .filter((f) =>language &&  f.flag !== language.flag)
           .map((flag) => (
-            <Pressable key={flag.code} onPress={() => setFlag(flag)}>
+            <Pressable key={flag.code} onPress={() => setLanguage(flag)}>
               <View style={OptionStyle.flagStyle}>
                 <Image style={OptionStyle.Image} source={getFlags(flag.flag)} />
               </View>

@@ -1,12 +1,9 @@
 import {
-  View,
   StyleSheet,
   Modal as SelectionModal,
   TouchableWithoutFeedback,
-  TouchableOpacity,
   Pressable,
 } from "react-native";
-import { theme } from "../../themes";
 import { ReactNode } from "react";
 
 interface ModalProps {
@@ -24,11 +21,7 @@ export default function Modal({ children, hideModalFunction }: ModalProps) {
       animationType="fade"
     >
       <Pressable onPress={() => hideModalFunction()} style={ModalStyle.Modal}>
-        <TouchableWithoutFeedback style={{zIndex: 2}}
-          onPress={(e) => console.log("touched touchable without feedback")}
-        >
-          {children}
-        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback>{children}</TouchableWithoutFeedback>
       </Pressable>
     </SelectionModal>
   );

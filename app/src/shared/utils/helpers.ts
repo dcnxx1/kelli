@@ -20,7 +20,7 @@ const flags = {
   Netherlands: require("../images/flags/netherlands.png"),
 };
 
-export default function getAvatar(avatarKey: string): any {
+export default function getAvatar(avatarKey?: string): any {
   switch (avatarKey) {
     case AvatarKey.KevinAvatar:
       return avatars.KevinAvatar;

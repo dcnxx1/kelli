@@ -1,7 +1,7 @@
 import { Image, StyleSheet } from "react-native";
 import getAvatar from "../../utils/helpers";
 interface Props {
-  avatarKey: string;
+  avatarKey?: string;
 }
 
 export default function Character({ avatarKey }: Props) {
