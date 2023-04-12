@@ -4,15 +4,18 @@ interface Props {
   avatarKey?: string;
 }
 
-export default function Character({ avatarKey }: Props) {
+export default function Avatar({ avatarKey }: Props) {
   return <Image source={getAvatar(avatarKey)} style={ImageStyle.Image} />;
 }
 
 const ImageStyle = StyleSheet.create({
   Image: {
+    // flex: 1,
     alignSelf: "center",
-    maxWidth: "90%",
-    maxHeight: "90%",
+    // maxWidth: 150,
+    aspectRatio: 1.1,
+    // maxHeight: 150,
     padding: 10,
+    resizeMode: "contain",
   },
 });

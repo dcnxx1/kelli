@@ -7,7 +7,7 @@ import {
   SelectableCharacters,
 } from "../../models/character";
 import {
-  Character as Avatar,
+  Avatar,
   DisplayName,
   Frame,
   LanguageOptions,
@@ -26,7 +26,6 @@ export default function Home() {
   const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
   const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   const setLanguageCallback = useCallback(
     (selectLanguage: SelectLanguage) => {
@@ -35,6 +34,10 @@ export default function Home() {
     },
     [language, setLanguage]
   );
+
+  const changeCharacter = useCallback((character: Character) => {
+    setCharacter(character)
+  }, [])
 
   useEffect(() => {
     const characterPredicate = (char: Character) =>
@@ -61,7 +64,7 @@ export default function Home() {
             setOptions={setOptions}
             country={character && character.language}
           />
-          <DisplayName characters={characterArray}>
+          <DisplayName character={character} setCharacter={changeCharacter} characters={characterArray}>
             {!!character && character.characterName}
           </DisplayName>
         </View>
