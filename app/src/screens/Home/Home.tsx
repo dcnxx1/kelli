@@ -28,11 +28,33 @@ export default function Home() {
   const [isOpenOptions, setOptions] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
-  const setLanguageCallback = useCallback((selectLanguage : SelectLanguage) => {
-    setLanguage(selectLanguage)
-    setOptions(false)
-    console.log("language set :>>", language)
-  }, [language, setLanguage]);
+  const setLanguageCallback = useCallback(
+    (selectLanguage: SelectLanguage) => {
+      setLanguage(selectLanguage);
+      setOptions(false);
+    },
+    [language, setLanguage]
+  );
+
+  useEffect(() => {
+    const characterPredicate = (char: Character) =>
+      char.language === language?.flag;
+    const filteredCharacters = modifiedChars.filter(characterPredicate);
+    setCharacterArray(filteredCharacters);
+  }, [language]);
+
+  useEffect(() => {
+    setCharacter(characterArray[0]);
+  }, [characterArray]);
+
+  useEffect(() => {
+    console.log(language);
+    console.log(characterArray);
+  }, [language]);
+  useEffect(() => {
+    setCharacter(characterArray[0]);
+    setLanguage(languageArray[0]);
+  }, []);
 
   return (
     <View style={ss.Homes}>
