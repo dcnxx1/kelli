@@ -35,9 +35,12 @@ export default function Home() {
     [language, setLanguage]
   );
 
-  const changeCharacter = useCallback((character: Character) => {
-    setCharacter(character)
+  const changeCharacter = useCallback((recievedCharacter: Character) => {
+    if(character.voiceId !== recievedCharacter.voiceId){
+      setCharacter(recievedCharacter)
+    }
   }, [])
+
 
   useEffect(() => {
     const characterPredicate = (char: Character) =>

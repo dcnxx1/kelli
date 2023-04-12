@@ -18,15 +18,18 @@ import Check from "../../images/actions/check.png";
 interface Props {
   children?: ReactNode;
   characters: Character[];
-  setCharacter : (character: Character) => void
-  character: Character
+  setCharacter: (character: Character) => void;
+  character: Character;
 }
 
-export default function DisplayName({ children, characters, setCharacter,  character }: Props) {
+export default function DisplayName({
+  children,
+  characters,
+  setCharacter,
+  character,
+}: Props) {
   const [openSelection, setIsOpenSelected] = useState(false);
- 
-  
- 
+
   const changeSelection = useCallback(() => {
     setIsOpenSelected(!openSelection);
   }, [openSelection]);
@@ -66,7 +69,7 @@ export default function DisplayName({ children, characters, setCharacter,  chara
                           />
                         )}
                         <Avatar avatarKey={item.avatarKey} />
-                        <Text>{item.characterName}</Text>
+                        <Text style={OptionModal.NameText}>{item.characterName}</Text>
                       </Frame>
                     </Pressable>
                   );
@@ -153,4 +156,9 @@ const OptionModal = StyleSheet.create({
     marginHorizontal: 10,
     width: "100%",
   },
+
+  NameText: {
+    alignSelf: 'center',
+    fontSize: 15,
+  }
 });
