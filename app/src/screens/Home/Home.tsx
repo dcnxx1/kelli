@@ -25,6 +25,10 @@ export default function Home() {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
 
+  const getCharactersByCurrentFlag = () => {
+
+  }
+
   return (
     <View style={ss.Homes}>
       <Frame>

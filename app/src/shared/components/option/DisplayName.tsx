@@ -8,11 +8,12 @@ interface Props {
   children?: ReactNode;
 }
 export default function DisplayName({ children }: Props) {
-  const [openSelection, setIsOpenSelected] = useState(true);
+  const [openSelection, setIsOpenSelected] = useState(false);
 
-  const changeSelection = () => {
+  const changeSelection = useCallback(() => {
     setIsOpenSelected(!openSelection);
-  };
+  }, [openSelection]);
+
 
   return (<>
     <Pressable onPress={changeSelection} style={OptionStyle.Option}>
@@ -20,7 +21,12 @@ export default function DisplayName({ children }: Props) {
       <Image style={OptionStyle.dropDown} source={DropDown} />
     </Pressable>
 
-    {openSelection && <Modal></Modal>}
+    {openSelection &&
+    (<Modal hideModalFunction={changeSelection}>
+      <View style={OptionStyle.SelectionScreen}>
+        
+      </View>
+    </Modal>)}
     </>
   );
 }
@@ -47,4 +53,16 @@ const OptionStyle = StyleSheet.create({
     width: 10,
     height: 10,
   },
+
+  SelectionScreen: {
+    width: '90%',
+    height: '60%',
+    backgroundColor: theme.colors.kelliBrown,
+    alignSelf: 'center',
+    opacity: 1,
+    borderRadius: 15,
+    borderStyle: 'dashed',
+    borderWidth: 2,
+    borderColor: theme.colors.kelliBright
+  }
 });
