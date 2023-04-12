@@ -1,14 +1,27 @@
-import { View, StyleSheet, Text } from "react-native";
-import { ReactNode } from "react";
+import { View, StyleSheet, Text, Image, Pressable } from "react-native";
+import { ReactNode, useState, useCallback, useContext } from "react";
 import { theme } from "../../themes";
+import DropDown from "../../images/actions/icondropdown.png";
+import Modal from "../modal/Modal";
+
 interface Props {
   children?: ReactNode;
 }
 export default function DisplayName({ children }: Props) {
-  return (
-    <View style={OptionStyle.Option}>
+  const [openSelection, setIsOpenSelected] = useState(true);
+
+  const changeSelection = () => {
+    setIsOpenSelected(!openSelection);
+  };
+
+  return (<>
+    <Pressable onPress={changeSelection} style={OptionStyle.Option}>
       <Text style={OptionStyle.NameText}>{children}</Text>
-    </View>
+      <Image style={OptionStyle.dropDown} source={DropDown} />
+    </Pressable>
+
+    {openSelection && <Modal></Modal>}
+    </>
   );
 }
 
@@ -16,14 +29,22 @@ const OptionStyle = StyleSheet.create({
   Option: {
     width: 100,
     borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: theme.colors.kelliPurple,
+    flexDirection: "row",
     maxHeight: 40,
+    alignItems: "center",
+    paddingHorizontal: 10,
+    lineHeight: 2,
   },
 
   NameText: {
-    color:'white',
-    fontSize: 13
+    color: "white",
+    flex: 1,
+    fontSize: 13,
+  },
+  dropDown: {
+    resizeMode: "contain",
+    width: 10,
+    height: 10,
   },
 });

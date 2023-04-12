@@ -20,10 +20,11 @@ export default function Home() {
   const [languageArray, setLanguageArray] =useState<SelectLanguage[]>(Languages);
     //  STATES
   const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
-  const [character, setCharacter] = useState<Character>(characterArray[0]);
+  const [character, setCharacter] = useState<Character>(characterArray[3]);
   const [isOpenOptions, setOptions] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  console.log(isOpenOptions);
+
+
   return (
     <View style={ss.Homes}>
       <Frame>
