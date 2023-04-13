@@ -11,9 +11,9 @@ import {
   DisplayName,
   Frame,
   LanguageOptions,
+  Input,
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
-import Input from "../../shared/components/input/Input";
 const modifiedChars = [...SelectableCharacters];
 
 export default function Home() {
@@ -27,6 +27,7 @@ export default function Home() {
   const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
   const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
+  const [input, setInput] = useState<string>('');
 
   const setLanguageCallback = useCallback(
     (selectLanguage: SelectLanguage) => {
@@ -53,6 +54,7 @@ export default function Home() {
     setCharacter(characterArray[0]);
   }, [characterArray]);
 
+
   return (
     <View style={ss.Homes}>
       <View style={ss.FrameContainer}>
@@ -78,7 +80,9 @@ export default function Home() {
           </View>
         </Frame>
       </View>
-      <Input />
+      <View style={ss.InputContainer}>
+        <Input inputValue={input} changeInput={setInput} />
+      </View>
     </View>
   );
 }
@@ -98,9 +102,17 @@ const ss = StyleSheet.create({
   },
   FrameContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
     zIndex: 400,
-  }
+  },
+
+  InputContainer: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    borderWidth: 2,
+  },
 });

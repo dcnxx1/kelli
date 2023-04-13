@@ -14,8 +14,8 @@ interface KelliError {
 }
 
 export default function useRequest(path: string, request?: any) {
-    console.log("hook renders")
-  const [response, setResponse] = useState<string>();
+  console.log("hook renders");
+  const [response, setResponse] = useState<any>();
   const [status, setStatus] = useState();
   const [error, setError] = useState<any>();
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -24,32 +24,33 @@ export default function useRequest(path: string, request?: any) {
     baseURL: "http://192.168.2.20:3030/tts/",
   });
 
- 
-
   useEffect(() => {
-    try {
-        api
-         .get(path)
-         .then((res) => {
-           setLoading(true);
-           if(!!res.data){
-            setResponse(res.data);
-           }
-           setLoading(false);
-         })
-         .catch((err) => {
-           if (err) {
-             setError(err);
-           }
-         });
-     } catch (err) {
-       if (err) {
-         setError(err);
-       }
-     }
-  }, []);
+    if (!request) {
+     return 
+    }
 
- 
+    setResponse('OK good to go')
+    // try {
+    //     api
+    //      .get(path)
+    //      .then((res) => {
+    //        setLoading(true);
+    //        if(!!res.data){
+    //         setResponse(res.data);
+    //        }
+    //        setLoading(false);
+    //      })
+    //      .catch((err) => {
+    //        if (err) {
+    //          setError(err);
+    //        }
+    //      });
+    //  } catch (err) {
+    //    if (err) {
+    //      setError(err);
+    //    }
+    //  }
+  }, [request]);
 
   const data = {
     response,

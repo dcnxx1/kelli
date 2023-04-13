@@ -1,50 +1,61 @@
 import {
-  View,
-  TextInput,
-  StyleSheet,
   Image,
+  NativeSyntheticEvent,
+  StyleSheet,
+  TextInput,
+  TextInputSubmitEditingEventData,
+  View,
 } from "react-native";
-import { theme } from "../../themes";
 import Bucket from "../../images/actions/delete.png";
-import {useState, useCallback, useRef, useMemo, memo} from 'react'
-import useRequest from '../../hooks/useRequest';
-let  rendered = 0
+import { theme } from "../../themes";
+import { useCallback, useState, useEffect, useMemo } from "react";
+import { useRequest } from "../../hooks";
+interface PropsInput {
+  inputValue: string;
+  changeInput: (newText: string) => void;
+}
 
+type SubmitEvent = NativeSyntheticEvent<TextInputSubmitEditingEventData>;
 
-function Input() {
-    const [input, setInput] = useState<string>('')
+export default function Input({ inputValue, changeInput }: PropsInput) {
+  const [submitInput, setSubmitInput] = useState<string>("");
 
-    const changeInput = useCallback((newText: string) => {
-        setInput(newText)
-    }, [setInput])
-    
-    return (
-    <View style={InputStyle.Container}>
-      <View style={InputStyle.InputContainer}>
-        <TextInput
-          value={input}
-          onChangeText={newText => changeInput(newText)}
-          placeholderTextColor={theme.colors.kelliGrey}
-          placeholder="Say something to Kevin..."
-          multiline
-          blurOnSubmit={true}
-          style={InputStyle.Input}
-        />
-        <Image style={InputStyle.Bucket} source={Bucket} />
-      </View>
+  const data = useRequest(`generated/${submitInput}`, submitInput);
+
+  const onSubmitInput = useCallback(
+    (e: SubmitEvent) => {
+      e.preventDefault();
+      if (inputValue) {
+        setSubmitInput(inputValue);
+      }
+    },
+    [inputValue]
+  );
+
+  useEffect(() => {
+    if (!inputValue) {
+      return;
+    }
+  }, [submitInput]);
+
+  return (
+    <View style={InputStyle.InputContainer}>
+      <TextInput
+        value={inputValue}
+        onChangeText={(newText) => changeInput(newText)}
+        placeholderTextColor={theme.colors.kelliGrey}
+        placeholder="Say something to Kevin..."
+        multiline
+        blurOnSubmit={true}
+        onSubmitEditing={(e) => onSubmitInput(e)}
+        style={InputStyle.Input}
+      />
+      <Image style={InputStyle.Bucket} source={Bucket} />
     </View>
   );
 }
 
-export default memo(Input)
-
 const InputStyle = StyleSheet.create({
-  Container: {
-    flex: 2,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   InputContainer: {
     backgroundColor: theme.colors.kelliBrown,
     minHeight: 50,
