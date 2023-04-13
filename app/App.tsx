@@ -1,14 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { Home } from "./src/screens";
-import ModalContext from "./src/shared/context/ModalContext";
+import AudioContext from "./src/shared/context/AudioContext";
 
 export default function App() {
   return (
     <View style={homeStyle.App}>
-      <ModalContext>
+      <AudioContext>
         <Home />
-      </ModalContext>
+      </AudioContext>
       <StatusBar style="auto" />
     </View>
   );

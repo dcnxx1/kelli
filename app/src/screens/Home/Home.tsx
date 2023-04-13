@@ -15,6 +15,7 @@ import {
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
 const modifiedChars = [...SelectableCharacters];
+import { useAudio } from "../../shared/context/AudioContext";
 
 export default function Home() {
   // STATIC DATA (ARRAYS)
@@ -28,6 +29,13 @@ export default function Home() {
   const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
   const [input, setInput] = useState<string>('');
+  const audi = useAudio()
+  
+  if(audi.playSound){
+    console.log("audi.playsound js working")
+    audi.playSound()
+  }
+
 
   const setLanguageCallback = useCallback(
     (selectLanguage: SelectLanguage) => {
@@ -36,7 +44,9 @@ export default function Home() {
     },
     [language, setLanguage]
   );
-
+    useEffect(() => {
+      
+    }, [])
   const changeCharacter = useCallback((recievedCharacter: Character) => {
     if (character.voiceId !== recievedCharacter.voiceId) {
       setCharacter(recievedCharacter);
