@@ -44,10 +44,14 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    setInput("");
+  }, [character]);
+  useEffect(() => {
     const characterPredicate = (char: Character) =>
       char.language === language?.flag;
     const filteredCharacters = modifiedChars.filter(characterPredicate);
     setCharacterArray(filteredCharacters);
+    setInput("");
   }, [language]);
 
   useEffect(() => {

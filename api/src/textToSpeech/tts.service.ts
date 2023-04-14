@@ -17,9 +17,6 @@ export class TTSService {
   apiVersion: '2006-03-01'
  });
 
- private params = {
-  LanguageCode: 'en-US'
- };
  protected describeVoicesOutput: AWS.Polly.Voice[] = [];
  protected voiceAudio: Polly.SynthesizeSpeechOutput = {};
  public audioUri: string = '';

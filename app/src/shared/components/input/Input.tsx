@@ -33,7 +33,6 @@ export default function Input({
     (e: SubmitEvent) => {
       e.preventDefault();
       if (inputValue) {
-        console.log("input value onSubmit line 36 =>>", inputValue);
         setSubmitInput(inputValue);
       }
     },

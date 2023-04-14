@@ -2,16 +2,15 @@ import {
   View,
   StyleSheet,
   Image,
-  FlatList,
   TouchableOpacity,
   Pressable,
   ViewStyle,
-  PressableProps,
+  TouchableWithoutFeedback
 } from "react-native";
 import { theme } from "../../themes";
 import { getFlags } from "../../utils/helpers";
 import DropDown from "../../images/actions/icondropdown.png";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { SelectLanguage } from "../../../models/character";
 import styled from "styled-components/native";
 import React from "react";
@@ -38,9 +37,9 @@ export default function LanguageOptions({
   language,
   setLanguage,
 }: Props) {
-  const changeOptions = useCallback(() => {
-    setOptions(!isOpen);
-  }, [isOpen]);
+
+  
+  const changeOptions = () => {setOptions(!isOpen)}
 
   return (
     <TouchableOpacity style={OptionStyle.styleOptions} onPress={changeOptions}>

@@ -1,4 +1,4 @@
-import { Audio } from "expo-av";
+import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
 import {
   ReactNode,
@@ -29,14 +29,28 @@ export default function AudioContext({ children }: Props) {
   const [sound, setSound] = useState<Sound>();
 
   async function playSound(speechUrl: string, textr: string) {
-    const { sound } = await Audio.Sound.createAsync(
-      { uri: speechUrl },
-      { shouldPlay: true }
-    );
+    try {
+    //  TODO: Ask permission and tell the user that microphone will NEVER be used.
+      (await Audio.requestPermissionsAsync()).canAskAgain;
+     
+      await Audio.setAudioModeAsync({
+        staysActiveInBackground: true,
+        interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
+        shouldDuckAndroid: false,
+        playThroughEarpieceAndroid: false,
+        allowsRecordingIOS: false,
+        interruptionModeIOS: InterruptionModeIOS.DoNotMix,
+        playsInSilentModeIOS: true,
+      });
+      const { sound } = await Audio.Sound.createAsync(
+        { uri: speechUrl },
+        { shouldPlay: true }
+      );
 
-    setSound(sound);
+      setSound(sound);
 
-    await sound.playAsync();
+      await sound.playAsync();
+    } catch (err) {}
   }
 
   useEffect(() => {

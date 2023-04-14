@@ -24,7 +24,7 @@ export interface Character {
 export interface SelectLanguage {
   flag: string;
   country: string;
-  code: string
+  code: string;
 }
 
 export enum AvatarKey {
@@ -102,7 +102,7 @@ export const SelectableCharacters: Character[] = [
     disabled: false,
   },
   {
-    voiceId: "Stella",
+    voiceId: "Léa",
     languageCode: LanguageCodes.French,
     disabled: false,
     characterName: "Stella",
@@ -144,16 +144,16 @@ export const Languages: SelectLanguage[] = [
   {
     flag: Language.English,
     country: "Great-Brittain",
-    code: LanguageCodes.English
+    code: LanguageCodes.English,
   },
   {
     flag: Language.France,
     country: "France",
-    code: LanguageCodes.French
+    code: LanguageCodes.French,
   },
   {
     flag: Language.Netherlands,
     country: "Netherlands",
-    code: LanguageCodes.Dutch
+    code: LanguageCodes.Dutch,
   },
 ];
