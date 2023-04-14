@@ -1,8 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import AWS, { Polly } from 'aws-sdk';
-import { Readable, Stream } from 'stream';
-import { join } from 'path';
-import fs from 'fs';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import AWS, { Polly, S3 } from 'aws-sdk';
 
 @Injectable()
 export class TTSService {
@@ -11,34 +8,21 @@ export class TTSService {
   region: 'eu-central-1'
  });
 
+ private presigned: AWS.Polly.Presigner = new Polly.Presigner({
+  service: this.polly
+ });
+
+ private s3: AWS.S3 = new S3({
+  region: 'eu-central-1',
+  apiVersion: '2006-03-01'
+ });
+
  private params = {
   LanguageCode: 'en-US'
  };
  protected describeVoicesOutput: AWS.Polly.Voice[] = [];
  protected voiceAudio: Polly.SynthesizeSpeechOutput = {};
- audioUri: string = '';
-
- get(): string {
-  return 'CHANGED AGAIN AGAIN';
- }
-
- describeVoices(): AWS.Polly.Voice[] {
-  try {
-   this.polly.describeVoices(this.params, (err, data) => {
-    if (err) {
-     throw new NotFoundException('No voice found');
-    }
-    for (let voice of data.Voices) {
-     this.describeVoicesOutput.push(voice);
-    }
-   });
-   return this.describeVoicesOutput;
-  } catch (err) {
-   if (err) {
-    console.log('err ->>', err);
-   }
-  }
- }
+ public audioUri: string = '';
 
  private getRequestParams(textToSpeech: string, voiceId: string) {
   return {
@@ -46,24 +30,22 @@ export class TTSService {
    Text: textToSpeech,
    VoiceId: voiceId,
    Engine: 'neural',
-   TextType: 'text',
-   OutputS3BucketName: 'kellibucket'
+   TextType: 'text'
   };
  }
 
  startSpeech(text: string, voiceId: string): string {
-  try {
-   if (!text || !voiceId) {
-    throw new Error('Text or voiceId are undefined');
-   }
+  if (!text || !voiceId) {
+   throw new Error('Text or voiceId are undefined');
+  }
 
-   this.polly.startSpeechSynthesisTask(
-    this.getRequestParams(text, voiceId),
-    (err, data) => {
-     if (err) throw new Error('Failed to request data from polly');
-     this.audioUri = data.SynthesisTask.OutputUri;
-    }
-   );
+  try {
+   const requestParams = this.getRequestParams(text, voiceId);
+   this.presigned.getSynthesizeSpeechUrl(requestParams, (err, url) => {
+    if (err) throw new Error('Cannot get presigned speech url ' + err.message);
+    this.audioUri = url;
+   });
+
    return this.audioUri;
   } catch (err) {
    throw new Error(
