@@ -20,8 +20,6 @@ type SubmitEvent = NativeSyntheticEvent<TextInputSubmitEditingEventData>;
 export default function Input({ inputValue, changeInput }: PropsInput) {
   const [submitInput, setSubmitInput] = useState<string>("");
 
-  const data = useRequest(`generated/${submitInput}`, submitInput);
-
   const onSubmitInput = useCallback(
     (e: SubmitEvent) => {
       e.preventDefault();

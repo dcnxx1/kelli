@@ -25,31 +25,30 @@ export default function useRequest(path: string, request?: any) {
   });
 
   useEffect(() => {
-    if (!request) {
-     return 
+    // if (!request) {
+    //   return;
+    // }
+    try {
+      api
+        .get(path)
+        .then((res) => {
+          setLoading(true);
+          if (res.data) {
+            setResponse(res.data);
+            console.log("resp:>>", res.data);
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          if (err) {
+            setError(err);
+          }
+        });
+    } catch (err) {
+      if (err) {
+        setError(err);
+      }
     }
-
-    setResponse('OK good to go')
-    // try {
-    //     api
-    //      .get(path)
-    //      .then((res) => {
-    //        setLoading(true);
-    //        if(!!res.data){
-    //         setResponse(res.data);
-    //        }
-    //        setLoading(false);
-    //      })
-    //      .catch((err) => {
-    //        if (err) {
-    //          setError(err);
-    //        }
-    //      });
-    //  } catch (err) {
-    //    if (err) {
-    //      setError(err);
-    //    }
-    //  }
   }, [request]);
 
   const data = {

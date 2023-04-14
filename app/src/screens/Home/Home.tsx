@@ -16,6 +16,7 @@ import {
 import { theme } from "../../shared/themes";
 const modifiedChars = [...SelectableCharacters];
 import { useAudio } from "../../shared/context/AudioContext";
+import { useRequest } from "../../shared/hooks";
 
 export default function Home() {
   // STATIC DATA (ARRAYS)
@@ -28,15 +29,11 @@ export default function Home() {
   const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
   const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
-  const [input, setInput] = useState<string>('');
-  const audi = useAudio()
+  const [input, setInput] = useState<string>("");
+  const data = useRequest("generate/sampleAudio", "illias fietto");
+  const audi = useAudio();
   
-  if(audi.playSound){
-    console.log("audi.playsound js working")
-    audi.playSound()
-  }
-
-
+  
   const setLanguageCallback = useCallback(
     (selectLanguage: SelectLanguage) => {
       setLanguage(selectLanguage);
@@ -44,9 +41,7 @@ export default function Home() {
     },
     [language, setLanguage]
   );
-    useEffect(() => {
-      
-    }, [])
+  useEffect(() => {}, []);
   const changeCharacter = useCallback((recievedCharacter: Character) => {
     if (character.voiceId !== recievedCharacter.voiceId) {
       setCharacter(recievedCharacter);
@@ -63,7 +58,6 @@ export default function Home() {
   useEffect(() => {
     setCharacter(characterArray[0]);
   }, [characterArray]);
-
 
   return (
     <View style={ss.Homes}>
