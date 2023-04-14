@@ -1,51 +1,51 @@
-import {
-  createContext,
-  useState,
-  ReactNode,
-  useEffect,
-  useContext,
-} from "react";
 import { Audio } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
-import snd from "../images/5376ed54-2995-4760-b009-89fe4ffd3273.mp3";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+
 interface Props {
   children?: ReactNode;
 }
 
 export interface IAudioContext {
-  playSound?: (snd: string) => Promise<void> | undefined;
+  playSound: (speechUrl: string, textr: string) => Promise<void> | undefined;
   setAudioLink?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const defaultState: IAudioContext = {
-  playSound: (snd: string) => undefined,
+  playSound: (speechUrl: string, textr: string) => undefined,
   setAudioLink: () => undefined,
 };
 
-export const ContextAudio = createContext<IAudioContext>(defaultState);
+const ContextAudio = createContext<IAudioContext>(defaultState);
 
 export default function AudioContext({ children }: Props) {
   const [audioLink, setAudioLink] = useState("");
-  const [playback, setPlayback] = useState<Sound>();
+  const [sound, setSound] = useState<Sound>();
 
-  async function playSound(snd: string) {
-    try {
-      const { sound } = await Audio.Sound.createAsync({
-        uri: snd,
-      });
-      await sound.playAsync();
-    } catch (err) {
-      console.log("err occured :>>", err);
-    }
+  async function playSound(speechUrl: string, textr: string) {
+    const { sound } = await Audio.Sound.createAsync(
+      { uri: speechUrl },
+      { shouldPlay: true }
+    );
+
+    setSound(sound);
+
+    await sound.playAsync();
   }
 
-  // useEffect(() => {
-  //   return playback
-  //     ? () => {
-  //         playback.unloadAsync();
-  //       }
-  //     : undefined;
-  // }, [playback]);
+  useEffect(() => {
+    return sound
+      ? () => {
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
 
   return (
     <ContextAudio.Provider value={{ setAudioLink, playSound }}>

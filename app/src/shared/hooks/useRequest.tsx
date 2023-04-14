@@ -13,21 +13,28 @@ interface KelliError {
   message: string;
 }
 
-export default function useRequest(path: string, request?: any) {
-  console.log("hook renders");
+export default function useRequest(
+  path: string,
+  request?: any,
+  deps: any = []
+) {
   const [response, setResponse] = useState<any>();
   const [status, setStatus] = useState();
   const [error, setError] = useState<any>();
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const api = axios.create({
-    baseURL: "http://192.168.2.20:3030/tts/",
+    baseURL: "http://192.168.2.23:3030/tts/",
+    params: {
+      voiceId: request.voiceId,
+      text: request.text
+    }
   });
 
   useEffect(() => {
-    // if (!request) {
-    //   return;
-    // }
+    if (request === undefined) {
+      return;
+    }
     try {
       api
         .get(path)
@@ -35,7 +42,6 @@ export default function useRequest(path: string, request?: any) {
           setLoading(true);
           if (res.data) {
             setResponse(res.data);
-            console.log("resp:>>", res.data);
           }
           setLoading(false);
         })
@@ -49,7 +55,7 @@ export default function useRequest(path: string, request?: any) {
         setError(err);
       }
     }
-  }, [request]);
+  }, deps);
 
   const data = {
     response,

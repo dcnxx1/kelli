@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   Character,
@@ -10,13 +10,11 @@ import {
   Avatar,
   DisplayName,
   Frame,
-  LanguageOptions,
   Input,
+  LanguageOptions,
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
 const modifiedChars = [...SelectableCharacters];
-import { useAudio } from "../../shared/context/AudioContext";
-import { useRequest } from "../../shared/hooks";
 
 export default function Home() {
   // STATIC DATA (ARRAYS)
@@ -30,10 +28,7 @@ export default function Home() {
   const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
   const [input, setInput] = useState<string>("");
-  const data = useRequest("generate/sampleAudio", "illias fietto");
-  const audi = useAudio();
-  // https://stackoverflow.com/a/67736829 for custom hook !
-  
+
   const setLanguageCallback = useCallback(
     (selectLanguage: SelectLanguage) => {
       setLanguage(selectLanguage);
@@ -85,7 +80,11 @@ export default function Home() {
         </Frame>
       </View>
       <View style={ss.InputContainer}>
-        <Input inputValue={input} changeInput={setInput} />
+        <Input
+          inputValue={input}
+          changeInput={setInput}
+          character={character}
+        />
       </View>
     </View>
   );

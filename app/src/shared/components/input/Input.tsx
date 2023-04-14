@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from "react";
 import {
   Image,
   NativeSyntheticEvent,
@@ -8,33 +9,55 @@ import {
 } from "react-native";
 import Bucket from "../../images/actions/delete.png";
 import { theme } from "../../themes";
-import { useCallback, useState, useEffect, useMemo } from "react";
-import { useRequest } from "../../hooks";
+import useRequest from "../../hooks/useRequest";
+import { Character } from "../../../models/character";
+import { useAudio } from "../../context/AudioContext";
+
 interface PropsInput {
   inputValue: string;
   changeInput: (newText: string) => void;
+  character: Character;
 }
 
 type SubmitEvent = NativeSyntheticEvent<TextInputSubmitEditingEventData>;
 
-export default function Input({ inputValue, changeInput }: PropsInput) {
+export default function Input({
+  inputValue,
+  changeInput,
+  character,
+}: PropsInput) {
   const [submitInput, setSubmitInput] = useState<string>("");
+  const audio = useAudio();
 
   const onSubmitInput = useCallback(
     (e: SubmitEvent) => {
       e.preventDefault();
       if (inputValue) {
+        console.log("input value onSubmit line 36 =>>", inputValue);
         setSubmitInput(inputValue);
       }
     },
     [inputValue]
   );
 
+  const data = useRequest(
+    "generate",
+    { voiceId: character.voiceId, text: submitInput },
+    [submitInput]
+  );
+
   useEffect(() => {
     if (!inputValue) {
-      return;
+      return () => undefined;
     }
-  }, [submitInput]);
+
+    if (data.setData.response) {
+      const speechUrl = data.setData.response;
+      if (audio) {
+        audio.playSound(speechUrl, submitInput);
+      }
+    }
+  }, [data.setData.response]);
 
   return (
     <View style={InputStyle.InputContainer}>

@@ -4,8 +4,8 @@ import { TTSController } from './textToSpeech/tts.controller';
 import { TTSService } from './textToSpeech/tts.service';
 
 @Module({
-  imports: [TTSModule],
-  controllers: [TTSController],
-  providers: [TTSService],
+ imports: [TTSModule],
+ controllers: [TTSController],
+ providers: [TTSService]
 })
 export class AppModule {}
