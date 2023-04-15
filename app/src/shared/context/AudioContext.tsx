@@ -13,13 +13,11 @@ interface Props {
 }
 
 export interface IAudioContext {
-  playSound: (speechUrl: string, textr: string) => Promise<void> | undefined;
-  setAudioLink?: React.Dispatch<React.SetStateAction<string>>;
+  playSound: (speechUrl: string) => Promise<void> | undefined;
 }
 
 const defaultState: IAudioContext = {
-  playSound: (speechUrl: string, textr: string) => undefined,
-  setAudioLink: () => undefined,
+  playSound: (speechUrl: string) => undefined,
 };
 
 const ContextAudio = createContext<IAudioContext>(defaultState);
@@ -28,7 +26,7 @@ export default function AudioContext({ children }: Props) {
   const [audioLink, setAudioLink] = useState("");
   const [sound, setSound] = useState<Sound>();
 
-  async function playSound(speechUrl: string, textr: string) {
+  async function playSound(speechUrl: string) {
     try {
     //  TODO: Ask permission and tell the user that microphone will NEVER be used.
       (await Audio.requestPermissionsAsync()).canAskAgain;
@@ -62,7 +60,7 @@ export default function AudioContext({ children }: Props) {
   }, [sound]);
 
   return (
-    <ContextAudio.Provider value={{ setAudioLink, playSound }}>
+    <ContextAudio.Provider value={{ playSound }}>
       {children}
     </ContextAudio.Provider>
   );

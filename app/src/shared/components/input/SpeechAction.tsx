@@ -1,7 +1,9 @@
 import { useState } from "react";
 import {
+  GestureResponderEvent,
   Image,
   NativeSyntheticEvent,
+  Pressable,
   StyleSheet,
   TextInput,
   TextInputSubmitEditingEventData,
@@ -57,10 +59,15 @@ export default function SpeechAction({ character }: PropsInput) {
     setInputValue(newText);
   };
 
+  const clearInput = (e: GestureResponderEvent) => {
+    setInputValue("")
+    setSubmitInput("")
+  }
+
   useEffect(() => {
     setSubmitInput(inputValue);
   }, [setterSubmitValue]);
-  
+
   useEffect(() => {
     if (!submitInput.length) {
       return;
@@ -69,7 +76,7 @@ export default function SpeechAction({ character }: PropsInput) {
     if (data.setData.response) {
       const speechUrlLink = data.setData.response;
       if (audio) {
-        audio.playSound(speechUrlLink, "lazl");
+        audio.playSound(speechUrlLink);
       }
     }
   }, [data.setData.response]);
@@ -87,7 +94,9 @@ export default function SpeechAction({ character }: PropsInput) {
           onSubmitEditing={onSubmitInput}
           style={InputStyle.Input}
         />
-        <Image style={InputStyle.Bucket} source={Bucket} />
+        <Pressable onPress={clearInput}>
+          <Image style={InputStyle.Bucket} source={Bucket} />
+        </Pressable>
       </View>
 
       <View style={InputStyle.ButtonContainer}>

@@ -13,8 +13,8 @@ const FrameStyle = StyleSheet.create({
   Frame: {
     padding: 10,
     borderWidth: 3,
-    minWidth: '40%',
-    minHeight: '20%',
+    minWidth: "40%",
+    minHeight: "20%",
     borderColor: theme.colors.kelliBlack,
     borderStyle: "dotted",
     borderRadius: 10,

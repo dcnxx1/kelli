@@ -60,15 +60,6 @@ export const SelectableCharacters: Character[] = [
     disabled: false,
   },
   {
-    voiceId: "Olaf",
-    languageCode: LanguageCodes.USA,
-    avatarKey: AvatarKey.OlafAvatar,
-    language: Language.UnitedStates,
-
-    characterName: "Olaf",
-    disabled: true,
-  },
-  {
     voiceId: "Kendra",
     languageCode: LanguageCodes.USA,
     avatarKey: AvatarKey.KendraAvatar,
@@ -110,29 +101,13 @@ export const SelectableCharacters: Character[] = [
     language: Language.France,
   },
   {
-    voiceId: "Lotte",
-    languageCode: LanguageCodes.Dutch,
-    avatarKey: AvatarKey.LotteAvatar,
-    language: Language.Netherlands,
-    characterName: "Lotte",
-    disabled: true,
-  },
-  {
     voiceId: "Laura",
     languageCode: LanguageCodes.Dutch,
     avatarKey: AvatarKey.LauraAvatar,
     language: Language.Netherlands,
     characterName: "Laura",
     disabled: false,
-  },
-  {
-    voiceId: "Ruben",
-    languageCode: LanguageCodes.Dutch,
-    avatarKey: AvatarKey.RubenAvatar,
-    language: Language.Netherlands,
-    characterName: "Ruben",
-    disabled: false,
-  },
+  }
 ];
 
 export const Languages: SelectLanguage[] = [

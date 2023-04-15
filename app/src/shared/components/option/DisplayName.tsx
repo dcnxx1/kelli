@@ -33,7 +33,7 @@ export default function DisplayName({
   const changeSelection = useCallback(() => {
     setIsOpenSelected(!openSelection);
   }, [openSelection]);
-  
+
   return (
     <>
       <Pressable onPress={changeSelection} style={OptionStyle.Option}>
@@ -127,7 +127,6 @@ const OptionModal = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     paddingTop: 5,
-    borderWidth: 2,
   },
 
   ModalHeaderText: {

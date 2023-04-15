@@ -24,7 +24,7 @@ export default function Button({ submitInput, voiceId, setSubmitInput }: ButtonP
       const speechUrlLink = data.setData.response;
       if (audio) {
         if (submitInput.length) {
-          audio.playSound(speechUrlLink, "zo");
+          audio.playSound(speechUrlLink);
         }
       }
     }
