@@ -8,9 +8,10 @@ export class TTSController {
 
  @Get('generate')
  getVC(@Query() query: TTS): string {
+  console.log('query =>>', query);
   const { voiceId, text } = query;
-
+  const ll = this.ttsService.startSpeech(text, voiceId);
+  console.log('ll =>>', ll);
   return this.ttsService.startSpeech(text, voiceId);
  }
-
 }

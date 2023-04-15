@@ -52,7 +52,7 @@ export default function Home() {
     const filteredCharacters = modifiedChars.filter(characterPredicate);
     setCharacterArray(filteredCharacters);
   }, [language]);
-
+ 
   useEffect(() => {
     setCharacter(characterArray[0]);
   }, [characterArray]);

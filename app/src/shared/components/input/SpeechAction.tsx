@@ -11,6 +11,9 @@ import Bucket from "../../images/actions/delete.png";
 import { theme } from "../../themes";
 import { Character } from "../../../models/character";
 import Button from "../button/Button";
+import { useEffect } from "react";
+import { useRequest } from "../../hooks";
+import { useAudio } from "../../context/AudioContext";
 
 interface PropsInput {
   character: Character;
@@ -20,17 +23,56 @@ type SubmitEvent = NativeSyntheticEvent<TextInputSubmitEditingEventData>;
 
 export default function SpeechAction({ character }: PropsInput) {
   const [inputValue, setInputValue] = useState<string>("");
+  const [submitInput, setSubmitInput] = useState("");
+  const [setterSubmitValue, setSetterSubmitValue] = useState(false);
 
-  // const onSubmitInput = (e: SubmitEvent) => {
-  //   e.preventDefault();
-  //   if (inputValue) {
-  //     setInputValue()
-  //   }
-  // };
+  const data = useRequest(
+    "generate",
+    { voiceId: character.voiceId, text: submitInput },
+    [submitInput]
+  );
+  const audio = useAudio();
+
+  const onSubmitInput = (e: SubmitEvent) => {
+    e.preventDefault();
+    if (inputValue) {
+      setSubmitInput(inputValue);
+    } else {
+      setSubmitInput("");
+    }
+  };
+
+  useEffect(() => {
+    if (inputValue.length == 0) {
+      setSubmitInput("");
+    }
+  }, [inputValue]);
+
+  useEffect(() => {
+    setInputValue("");
+    setSubmitInput("");
+  }, [character]);
 
   const changeInputValue = (newText: string) => {
     setInputValue(newText);
   };
+
+  useEffect(() => {
+    setSubmitInput(inputValue);
+  }, [setterSubmitValue]);
+  
+  useEffect(() => {
+    if (!submitInput.length) {
+      return;
+    }
+
+    if (data.setData.response) {
+      const speechUrlLink = data.setData.response;
+      if (audio) {
+        audio.playSound(speechUrlLink, "lazl");
+      }
+    }
+  }, [data.setData.response]);
 
   return (
     <>
@@ -38,30 +80,30 @@ export default function SpeechAction({ character }: PropsInput) {
         <TextInput
           value={inputValue}
           onChangeText={changeInputValue}
-          placeholderTextColor={theme.colors.kelliGrey}
+          placeholderTextColor={theme.colors.kelliBright}
           placeholder="Say something to Kevin..."
           multiline
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {}}
+          onSubmitEditing={onSubmitInput}
           style={InputStyle.Input}
         />
         <Image style={InputStyle.Bucket} source={Bucket} />
       </View>
 
       <View style={InputStyle.ButtonContainer}>
-      <Button
-        submitInput={inputValue}
-        voiceId={character.voiceId}
-       />
+        <Button
+          setSubmitInput={setSetterSubmitValue}
+          submitInput={submitInput}
+          voiceId={character.voiceId}
+        />
       </View>
-      
-      </>
+    </>
   );
 }
 
 const InputStyle = StyleSheet.create({
   Container: {
-    width: '100%',
+    width: "100%",
     flex: 1,
   },
   InputContainer: {
@@ -89,9 +131,9 @@ const InputStyle = StyleSheet.create({
     height: 25,
   },
   ButtonContainer: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     flex: 1,
-  }
+  },
 });

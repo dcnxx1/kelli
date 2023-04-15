@@ -102,7 +102,7 @@ export const SelectableCharacters: Character[] = [
     disabled: false,
   },
   {
-    voiceId: "Léa",
+    voiceId: "Lea",
     languageCode: LanguageCodes.French,
     disabled: false,
     characterName: "Stella",
