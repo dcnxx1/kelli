@@ -10,11 +10,10 @@ import {
   Avatar,
   DisplayName,
   Frame,
-  Input,
   LanguageOptions,
-  KelliButton
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
+import SpeechAction from "../../shared/components/input/SpeechAction";
 const modifiedChars = [...SelectableCharacters];
 
 export default function Home() {
@@ -28,7 +27,7 @@ export default function Home() {
   const [language, setLanguage] = useState<SelectLanguage>(languageArray[0]);
   const [character, setCharacter] = useState<Character>(characterArray[0]);
   const [isOpenOptions, setOptions] = useState(false);
-  const [input, setInput] = useState<string>("");
+
 
   const setLanguageCallback = useCallback(
     (selectLanguage: SelectLanguage) => {
@@ -48,15 +47,10 @@ export default function Home() {
   );
 
   useEffect(() => {
-    setInput("");
-  }, [character]);
-
-  useEffect(() => {
     const characterPredicate = (char: Character) =>
       char.language === language?.flag;
     const filteredCharacters = modifiedChars.filter(characterPredicate);
     setCharacterArray(filteredCharacters);
-    setInput("");
   }, [language]);
 
   useEffect(() => {
@@ -88,15 +82,8 @@ export default function Home() {
           </View>
         </Frame>
       </View>
-      <View style={ss.InputContainer}>
-        <Input
-          inputValue={input}
-          changeInput={setInput}
-          character={character}
-        />
-      </View>
-      <View style={ss.ButtonContainer}>
-        <KelliButton />
+      <View style={ss.SpeechContainer}>
+        <SpeechAction character={character} />
       </View>
     </View>
   );
@@ -122,18 +109,11 @@ const ss = StyleSheet.create({
     width: "100%",
     zIndex: 400,
   },
-
-  InputContainer: {
+  SpeechContainer: {
     flex: 1,
     width: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 2,
+    justifyContent: "space-evenly",
   },
-  ButtonContainer: {
-    borderWidth: 5,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+
 });
