@@ -28,20 +28,15 @@ export default function SpeechAction({ character }: PropsInput) {
   const [submitInput, setSubmitInput] = useState("");
   const [setterSubmitValue, setSetterSubmitValue] = useState(false);
 
-  const data = useRequest(
-    "generate",
-    { voiceId: character.voiceId, text: submitInput },
-    [submitInput]
-  );
+  // const data = useRequest(
+  //   "generate",
+  //   { voiceId: character.voiceId, text: submitInput },
+  //   [submitInput]
+  // );
   const audio = useAudio();
 
   const onSubmitInput = (e: SubmitEvent) => {
     e.preventDefault();
-    if (inputValue) {
-      setSubmitInput(inputValue);
-    } else {
-      setSubmitInput("");
-    }
   };
 
   useEffect(() => {
@@ -60,26 +55,26 @@ export default function SpeechAction({ character }: PropsInput) {
   };
 
   const clearInput = (e: GestureResponderEvent) => {
-    setInputValue("")
-    setSubmitInput("")
-  }
+    setInputValue("");
+    setSubmitInput("");
+  };
 
   useEffect(() => {
     setSubmitInput(inputValue);
   }, [setterSubmitValue]);
 
-  useEffect(() => {
-    if (!submitInput.length) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (!submitInput.length) {
+  //     return;
+  //   }
 
-    if (data.setData.response) {
-      const speechUrlLink = data.setData.response;
-      if (audio) {
-        audio.playSound(speechUrlLink);
-      }
-    }
-  }, [data.setData.response]);
+  //   if (data.setData.response) {
+  //     const speechUrlLink = data.setData.response;
+  //     if (audio) {
+  //       audio.playSound(speechUrlLink);
+  //     }
+  //   }
+  // }, [data.setData.response]);
 
   return (
     <>

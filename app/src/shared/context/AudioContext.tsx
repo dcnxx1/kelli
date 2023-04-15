@@ -23,14 +23,13 @@ const defaultState: IAudioContext = {
 const ContextAudio = createContext<IAudioContext>(defaultState);
 
 export default function AudioContext({ children }: Props) {
-  const [audioLink, setAudioLink] = useState("");
   const [sound, setSound] = useState<Sound>();
 
   async function playSound(speechUrl: string) {
     try {
-    //  TODO: Ask permission and tell the user that microphone will NEVER be used.
+      //  TODO: Ask permission and tell the user that microphone will NEVER be used.
       (await Audio.requestPermissionsAsync()).canAskAgain;
-     
+
       await Audio.setAudioModeAsync({
         staysActiveInBackground: true,
         interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
