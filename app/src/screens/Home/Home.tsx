@@ -37,11 +37,14 @@ export default function Home() {
     [language, setLanguage]
   );
   useEffect(() => {}, []);
-  const changeCharacter = useCallback((recievedCharacter: Character) => {
-    if (character.voiceId !== recievedCharacter.voiceId) {
-      setCharacter(recievedCharacter);
-    }
-  }, []);
+  const changeCharacter = useCallback(
+    (recievedCharacter: Character) => {
+      if (character.voiceId !== recievedCharacter.voiceId) {
+        setCharacter(recievedCharacter);
+      }
+    },
+    [character]
+  );
 
   useEffect(() => {
     setInput("");
