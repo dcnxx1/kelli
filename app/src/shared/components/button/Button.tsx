@@ -14,7 +14,8 @@ interface ButtonProps {
 export default function Button({ submitInput, voiceId, setSubmitInput }: ButtonProps) {
 
   const data = useRequest("/generate", { voiceId, text: submitInput }, [
-    submitInput,
+    setSubmitInput,
+    submitInput
   ]);
   const audio = useAudio();
   

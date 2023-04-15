@@ -32,8 +32,11 @@ export default function useRequest(
   });
 
   useEffect(() => {
-    if (request === undefined) {
-      return;
+    if(!request.voiceId){
+      return
+    }
+    if(!request.text){
+      return
     }
     try {
       api
