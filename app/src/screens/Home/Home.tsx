@@ -12,6 +12,7 @@ import {
   Frame,
   Input,
   LanguageOptions,
+  KelliButton
 } from "../../shared/components";
 import { theme } from "../../shared/themes";
 const modifiedChars = [...SelectableCharacters];
@@ -94,6 +95,9 @@ export default function Home() {
           character={character}
         />
       </View>
+      <View style={ss.ButtonContainer}>
+        <KelliButton />
+      </View>
     </View>
   );
 }
@@ -123,7 +127,13 @@ const ss = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     borderWidth: 2,
   },
+  ButtonContainer: {
+    borderWidth: 5,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
