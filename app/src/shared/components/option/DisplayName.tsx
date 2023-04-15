@@ -33,7 +33,7 @@ export default function DisplayName({
   const changeSelection = useCallback(() => {
     setIsOpenSelected(!openSelection);
   }, [openSelection]);
-
+  
   return (
     <>
       <Pressable onPress={changeSelection} style={OptionStyle.Option}>
@@ -69,7 +69,9 @@ export default function DisplayName({
                           />
                         )}
                         <Avatar avatarKey={item.avatarKey} />
-                        <Text style={OptionModal.NameText}>{item.characterName}</Text>
+                        <Text style={OptionModal.NameText}>
+                          {item.characterName}
+                        </Text>
                       </Frame>
                     </Pressable>
                   );
@@ -158,7 +160,7 @@ const OptionModal = StyleSheet.create({
   },
 
   NameText: {
-    alignSelf: 'center',
+    alignSelf: "center",
     fontSize: 15,
-  }
+  },
 });

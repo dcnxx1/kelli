@@ -29,15 +29,14 @@ export default function Input({
   const [submitInput, setSubmitInput] = useState<string>("");
   const audio = useAudio();
 
-  const onSubmitInput = useCallback(
+  const onSubmitInput = 
     (e: SubmitEvent) => {
       e.preventDefault();
       if (inputValue) {
         setSubmitInput(inputValue);
       }
-    },
-    [inputValue]
-  );
+    }
+  
 
   const data = useRequest(
     "generate",

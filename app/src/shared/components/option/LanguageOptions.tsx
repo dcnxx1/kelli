@@ -37,7 +37,7 @@ export default function LanguageOptions({
   language,
   setLanguage,
 }: Props) {
-
+// TODO: Make languageOptions dissapear when selecting character, input onFocus & onClick button
   
   const changeOptions = () => {setOptions(!isOpen)}
 

@@ -36,7 +36,7 @@ export default function Home() {
     },
     [language, setLanguage]
   );
-  useEffect(() => {}, []);
+
   const changeCharacter = useCallback(
     (recievedCharacter: Character) => {
       if (character.voiceId !== recievedCharacter.voiceId) {
@@ -49,6 +49,7 @@ export default function Home() {
   useEffect(() => {
     setInput("");
   }, [character]);
+
   useEffect(() => {
     const characterPredicate = (char: Character) =>
       char.language === language?.flag;
